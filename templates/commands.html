@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ commands_thchat[0].username }}
+{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h2>{{ commands_thchat[0].username }}</h2>
+
+    {% for command in commands_thchat %}
+    <div class="alert alert-info">
+        <p>{{ command.command }}</p>
+        <p><b>Дата: {{ command.date.date() }}</b></p>
+    </div>
+    {% endfor %}
+
+</div>
+{% endblock %}
