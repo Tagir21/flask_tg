@@ -6,15 +6,19 @@
 
 {% block body %}
 <div class="container mt-5">
-    <h2>Статистика пользователей</h2>
+    {% if current_user.is_role() == 'director' %}
+        <h2>Статистика пользователей</h2>
 
-    {% for user in users %}
-    <div class="alert alert-info">
-        <h3>{{ user['rname'] }}</h3>
-        <a href="stats/{{ user['rchat_id'] }}/commands" class="btn btn-danger">Команды</a>
-        <a href="stats/{{ user['rchat_id'] }}/messages" class="btn btn-info">Сообщения</a>
-    </div>
-    {% endfor %}
+        {% for user in users %}
+        <div class="alert alert-info">
+            <h3>{{ user['rname'] }}</h3>
+            <a href="stats/{{ user['rchat_id'] }}/commands" class="btn btn-danger">Команды</a>
+            <a href="stats/{{ user['rchat_id'] }}/messages" class="btn btn-info">Сообщения</a>
+        </div>
+        {% endfor %}
+    {% else %}
+        <h1>Ваша роль не позволяет просматривать статистику</h1>
+    {% endif %}
 
 </div>
 {% endblock %}

@@ -6,11 +6,15 @@
 
 {% block body %}
 <div class="container mt-5">
-    <h1>Добавьте свой гороскоп</h1>
-    <form method="post">
-        <input type="text" name="title" id="title" class="form-control" placeholder="Введите знак зодиака"><br>
-        <textarea name="description" id="desc" class="form-control" placeholder="Введите гороскоп"></textarea><br>
-        <input type="submit" class="btn btn-success" value="Добавить">
-    </form>
+    {% if current_user.is_role() == 'manager' or current_user.is_role() == 'director' %}
+        <h1>Добавьте свой гороскоп</h1>
+        <form method="post">
+            <input type="text" name="title" id="title" class="form-control" placeholder="Введите знак зодиака"><br>
+            <textarea name="description" id="desc" class="form-control" placeholder="Введите гороскоп"></textarea><br>
+            <input type="submit" class="btn btn-success" value="Добавить">
+        </form>
+    {% else %}
+        <h1>Ваша роль не позволяет редактировать гороскопы</h1>
+    {% endif %}
 </div>
 {% endblock %}

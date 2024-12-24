@@ -1,19 +1,26 @@
 {% extends 'base.html' %}
 
 {% block title %}
-{{ messages_thchat[0].username }}
+{% if messages_thchat|length > 0 %}
+    {{ messages_thchat[0].username }}
+{% else %}
+    No name
+{% endif %}
 {% endblock %}
 
 {% block body %}
 <div class="container mt-5">
-    <h2>{{ messages_thchat[0].username }}</h2>
-
-    {% for message in messages_thchat %}
-    <div class="alert alert-info">
-        <p>{{ message.text }}</p>
-        <p><b>Дата: {{ message.date.date() }}</b></p>
-    </div>
-    {% endfor %}
+    {% if messages_thchat|length > 0 %}
+        <h2>{{ messages_thchat[0].username }}</h2>
+        {% for message in messages_thchat %}
+        <div class="alert alert-info">
+            <p>{{ message.text }}</p>
+            <p><b>Дата: {{ message.date.date() }}</b></p>
+        </div>
+        {% endfor %}
+    {% else %}
+        <h2>Данный пользователь еще не отправлял сообщения</h2>
+    {% endif %}
 
 </div>
 {% endblock %}
